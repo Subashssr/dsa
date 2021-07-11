@@ -1,0 +1,81 @@
+Problem
+        There are N houses for sale. The i-th house costs Ai dollars to buy. You have a budget of B dollars to spend.
+        What is the maximum number of houses you can buy?
+        Input
+        The first line of the input gives the number of test cases, T. T test cases follow. Each test case begins with a single line containing the two integers N and B. The second line contains N integers. The i-th integer is Ai, the cost of the i-th house.
+        Output
+        For each test case, output one line containing Case #x: y, where x is the test case number (starting from 1) and y is the maximum number of houses you can buy.
+        Limits
+        Time limit: 15 seconds per test set.
+        Memory limit: 1GB.
+        1 ≤ T ≤ 100.
+        1 ≤ B ≤ 105.
+        1 ≤ Ai ≤ 1000, for all i.
+        Test set 1
+        1 ≤ N ≤ 100.
+        Test set 2
+        1 ≤ N ≤ 105.
+        Sample
+        Input
+
+        3
+        4 100
+        20 90 40 90
+        4 50
+        30 30 10 10
+        3 300
+        999 999 999
+
+        Output
+        Case #1: 2
+        Case #2: 3
+        Case #3: 0
+
+
+import java.io.*;
+import java.util.Collections;
+import java.util.stream.*;
+import java.util.Arrays;
+
+public class KickStartAllocation {
+    public static void main(String[] args) throws Exception{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(br.readLine());
+        int res = 0;
+        int cntr = 1;
+
+        while(t-- > 0){
+            res = 0;
+            String temp[] = br.readLine().trim().split(" ");
+            int n = Integer.parseInt(temp[0]);
+            int b = Integer.parseInt(temp[1]);
+
+            int[] arr = Stream.of(br.readLine().trim().split(" ")).mapToInt(Integer::parseInt).toArray();
+
+//            arr = sort(arr, n);
+            Arrays.sort(arr);
+
+            for(int ii : arr){
+                if(ii <= b){
+                    res++;
+                    b -= ii;
+                }else break;
+            }
+            System.out.println(String.format("Case #%d : %d", cntr++, res));
+        }
+    }
+
+//    public static int[] sort(int[] a, int n){
+//        for(int ii = 0; ii < n-1; ii++){
+//            for(int jj = ii+1; jj < n; jj++){
+//                if(a[ii] > a[jj]){
+//                    a[ii] = a[ii] + a[jj];
+//                    a[jj] = a[ii] - a[jj];
+//                    a[ii] = a[ii] - a[jj];
+//                }
+//            }
+//        }
+//
+//        return a;
+//    }
+}
